@@ -1,0 +1,102 @@
+:root {
+  --primary: #00ffff;
+  --dark: #0a0a0a;
+  --glass: rgba(255, 255, 255, 0.1);
+  --blur: 12px;
+}
+
+body {
+  background: linear-gradient(135deg, #080808, #1f1f1f);
+  font-family: 'Segoe UI', sans-serif;
+  color: white;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 100vh;
+  margin: 0;
+}
+
+.card-container {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  padding: 2rem;
+}
+
+.glass-card {
+  background: var(--glass);
+  backdrop-filter: blur(var(--blur));
+  border-radius: 16px;
+  padding: 1.5rem;
+  width: clamp(280px, 50vw, 400px);
+  box-shadow: 0 8px 24px rgba(0, 255, 255, 0.2);
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
+  border: 1px solid rgba(255, 255, 255, 0.15);
+}
+
+.card-img {
+  width: 100%;
+  aspect-ratio: 16 / 9;
+  object-fit: cover;
+  border-radius: 12px;
+  filter: saturate(1.2) brightness(1.1);
+}
+
+.card-content h2 {
+  font-size: clamp(1.5rem, 3vw, 2rem);
+  color: var(--primary);
+}
+
+.card-content p {
+  font-size: clamp(0.9rem, 2vw, 1.1rem);
+}
+
+.switch {
+  position: relative;
+  display: inline-block;
+  width: 50px;
+  height: 24px;
+}
+
+.switch input {
+  display: none;
+}
+
+.slider {
+  position: absolute;
+  cursor: pointer;
+  top: 0; left: 0;
+  right: 0; bottom: 0;
+  background-color: #ccc;
+  border-radius: 24px;
+  transition: 0.4s;
+}
+
+.slider::before {
+  position: absolute;
+  content: "";
+  height: 18px;
+  width: 18px;
+  left: 4px;
+  bottom: 3px;
+  background-color: white;
+  border-radius: 50%;
+  transition: 0.4s;
+}
+
+input:checked + .slider {
+  background-color: var(--primary);
+}
+
+input:checked + .slider::before {
+  transform: translateX(26px);
+}
+
+/* Advanced :has() usage to scale card when toggle is checked */
+.glass-card:has(#toggleCard:checked) {
+  transform: scale(1.05);
+  box-shadow: 0 0 40px var(--primary);
+}
